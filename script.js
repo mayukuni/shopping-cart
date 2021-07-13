@@ -80,6 +80,14 @@ const fetchProduct = () => {
   // return product;
 };
 
+// requisito 6
+const clearCart = () => {
+  cartItems.innerHTML = '';
+};
+
+const clearButton = document.querySelector('.empty-cart');
+clearButton.addEventListener('click', clearCart);
+
 window.onload = () => {
   fetchProduct();
   // const product = fetchProduct();
