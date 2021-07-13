@@ -2,7 +2,6 @@
 // const url = 'https://api.mercadolibre.com/sites/MLB';
 const cartItems = document.querySelector('.cart__items');
 const items = document.querySelector('.items');
-// const addButton = document.querySelector('.item__add');
 const cart = document.querySelector('.cart');
 
 function createProductImageElement(imageSource) {
@@ -20,7 +19,7 @@ function createCustomElement(element, className, innerText) {
 }
 
 function cartItemClickListener(event) {
-  // coloque seu código aqui
+  event.target.remove();
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -54,9 +53,7 @@ const addToCart = (event) => {
             })
             .catch((error) => alert(`${error}`));
       });
-    // alert('Funcionou!')
 };
-// addToCart('MLB1341706310');
 
 function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
   const section = document.createElement('section');
