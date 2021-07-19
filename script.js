@@ -4,6 +4,8 @@ const cartItems = document.querySelector('.cart__items');
 const items = document.querySelector('.items');
 const cart = document.querySelector('.cart');
 
+// Requisitos 1 e 2 feitos com a ajuda do Jonathan Morais.
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -66,7 +68,18 @@ function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
   return section;
 }
 
+// requisito 7
+const addLoadingText = () => {
+  const loadingText = document.createElement('p');
+  loadingText.className = 'loading';
+  loadingText.innerHTML = 'loading';
+  return loadingText;
+};
+
 const fetchProduct = () => {
+  const loadingText = addLoadingText();
+  items.appendChild(loadingText);
+
   fetch('https://api.mercadolibre.com/sites/MLB/search?q=computador')
     .then((response) => response.json())
       .then((data) => {
@@ -74,10 +87,19 @@ const fetchProduct = () => {
           const product = createProductItemElement({ id: sku, title: name, thumbnail: image });
           items.appendChild(product);
         });
+        loadingText.remove();
       });
   // const response = await fetch(`${url}/search?q=computador`);
   // const product = await response.json();
   // return product;
+};
+
+const sumTotalValue = () => {
+  document.createElement('p').className = 'total-price';
+  // const value = price.salePrice;
+  const prices = document.querySelector('.total-price');
+  cartItems.appendChild(prices);
+  prices.innerText = 'teste';
 };
 
 // requisito 6
