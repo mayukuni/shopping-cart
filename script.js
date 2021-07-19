@@ -11,7 +11,7 @@ let itemPrices = 0;
 // const totalPrice = document.createElement('p');
 // totalPrice.className = 'total-price';
 const totalPrice = document.querySelector('.total-price');
-// /requisito 5
+// // /requisito 5
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -30,13 +30,19 @@ function createCustomElement(element, className, innerText) {
 // requisito 5
 const sumTotalValue = (prices) => {
     itemPrices += prices;
-    const decimalPrecision = parseFloat(itemPrices.toFixed(2));
-    totalPrice.innerText = decimalPrecision;
+    const teste = parseFloat(itemPrices);
+    totalPrice.innerText = teste;
   };
 // /requisito 5
 
+const saveOnLocalStorage = () => {
+  const savedItems = cartItems.innerHTML;
+  localStorage.setItem('savedItems', savedItems);
+};
+
 function cartItemClickListener(event) {
   event.target.remove();
+  saveOnLocalStorage();
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -49,6 +55,7 @@ function createCartItemElement({ sku, name, salePrice }) {
   console.log(li);
   cart.appendChild(cartItems);
   cartItems.appendChild(li);
+  saveOnLocalStorage();
   return li;
 }
 
@@ -110,10 +117,16 @@ const fetchProduct = () => {
   // return product;
 };
 
+const loadLocalStorage = () => {
+  const savedItems = localStorage.getItem('savedItems');
+  cartItems.innerHTML = savedItems;
+};
+
 // requisito 6
 const clearCart = () => {
   cartItems.innerHTML = '';
-  totalPrice.innerHTML = '';
+  // totalPrice.innerHTML = '';
+  saveOnLocalStorage();
 };
 
 const clearButton = document.querySelector('.empty-cart');
@@ -121,6 +134,7 @@ clearButton.addEventListener('click', clearCart);
 
 window.onload = () => {
   fetchProduct();
+  loadLocalStorage();
   // const product = fetchProduct();
   // product.results.forEach((products) => {
   //   const element = createProductItemElement(products);
