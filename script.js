@@ -4,11 +4,13 @@ const cartItems = document.querySelector('.cart__items');
 const items = document.querySelector('.items');
 const cart = document.querySelector('.cart');
 
+// Requisitos 1, 2 e 5 feitos com a ajuda do Jonathan Morais
+
 // requisito 5
 let itemPrices = 0;
-const totalPrice = document.createElement('p');
-totalPrice.className = 'total-price';
-const totalPriceElement = document.querySelector('.total-price');
+// const totalPrice = document.createElement('p');
+// totalPrice.className = 'total-price';
+const totalPrice = document.querySelector('.total-price');
 // /requisito 5
 
 function createProductImageElement(imageSource) {
@@ -29,7 +31,7 @@ function createCustomElement(element, className, innerText) {
 const sumTotalValue = (prices) => {
     itemPrices += prices;
     const decimalPrecision = parseFloat(itemPrices.toFixed(2));
-    totalPriceElement.innerText = decimalPrecision;
+    totalPrice.innerText = decimalPrecision;
   };
 // /requisito 5
 
@@ -111,7 +113,7 @@ const fetchProduct = () => {
 // requisito 6
 const clearCart = () => {
   cartItems.innerHTML = '';
-  totalPriceElement.innerHTML = '';
+  totalPrice.innerHTML = '';
 };
 
 const clearButton = document.querySelector('.empty-cart');
