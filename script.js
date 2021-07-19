@@ -30,7 +30,7 @@ function createCustomElement(element, className, innerText) {
 // requisito 5
 const sumTotalValue = (prices) => {
     itemPrices += prices;
-    const decimalPrecision = parseFloat(itemPrices.toFixed(2));
+    const decimalPrecision = parseFloat(itemPrices.toFixed(0));
     totalPrice.innerText = decimalPrecision;
   };
 // /requisito 5
