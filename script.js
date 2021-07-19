@@ -4,12 +4,13 @@ const cartItems = document.querySelector('.cart__items');
 const items = document.querySelector('.items');
 const cart = document.querySelector('.cart');
 
-// Requisitos 1, 2 e 5 feitos com a ajuda do Jonathan Morais
+// Requisitos 1, 2 e 5 feitos com a ajuda do Jonathan Morais.
+// Requisito 4 feito com a ajuda da Mayu.
 
 // requisito 5
 let itemPrices = 0;
-// const totalPrice = document.createElement('p');
-// totalPrice.className = 'total-price';
+// const totalPricee = document.createElement('div');
+// totalPricee.className = 'total-price';
 const totalPrice = document.querySelector('.total-price');
 // // /requisito 5
 
@@ -31,13 +32,16 @@ function createCustomElement(element, className, innerText) {
 const sumTotalValue = (prices) => {
     itemPrices += prices;
     const teste = parseFloat(itemPrices);
-    totalPrice.innerText = teste;
+    // totalPrice.innerText = teste;
+    totalPrice.innerHTML = `Total: ${teste}`;
   };
 // /requisito 5
 
 const saveOnLocalStorage = () => {
   const savedItems = cartItems.innerHTML;
   localStorage.setItem('savedItems', savedItems);
+  const totalPriceItens = totalPrice.innerHTML;
+  localStorage.setItem('totalPrice', totalPriceItens);
 };
 
 function cartItemClickListener(event) {
@@ -49,13 +53,13 @@ function createCartItemElement({ sku, name, salePrice }) {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
-  sumTotalValue(salePrice);
   li.addEventListener('click', cartItemClickListener);
   console.log(cart);
   console.log(li);
   cart.appendChild(cartItems);
   cartItems.appendChild(li);
   saveOnLocalStorage();
+  sumTotalValue(salePrice);
   return li;
 }
 
@@ -120,12 +124,15 @@ const fetchProduct = () => {
 const loadLocalStorage = () => {
   const savedItems = localStorage.getItem('savedItems');
   cartItems.innerHTML = savedItems;
+  const totalPriceItens = localStorage.getItem('totalPrice');
+  totalPrice.innerText = totalPriceItens;
 };
 
 // requisito 6
 const clearCart = () => {
   cartItems.innerHTML = '';
-  // totalPrice.innerHTML = '';
+  totalPrice.innerHTML = '';
+  itemPrices = 0;
   saveOnLocalStorage();
 };
 
