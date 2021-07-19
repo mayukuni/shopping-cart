@@ -33,7 +33,7 @@ const sumTotalValue = (prices) => {
     itemPrices += prices;
     const teste = parseFloat(itemPrices);
     // totalPrice.innerText = teste;
-    totalPrice.innerHTML = `Total: ${teste}`;
+    totalPrice.innerHTML = teste;
   };
 // /requisito 5
 
