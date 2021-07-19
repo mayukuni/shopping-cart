@@ -4,7 +4,12 @@ const cartItems = document.querySelector('.cart__items');
 const items = document.querySelector('.items');
 const cart = document.querySelector('.cart');
 
-// Requisitos 1 e 2 feitos com a ajuda do Jonathan Morais.
+// requisito 5
+let itemPrices = 0;
+const totalPrice = document.createElement('p');
+totalPrice.className = 'total-price';
+const totalPriceElement = document.querySelector('.total-price');
+// /requisito 5
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -20,6 +25,14 @@ function createCustomElement(element, className, innerText) {
   return e;
 }
 
+// requisito 5
+const sumTotalValue = (prices) => {
+    itemPrices += prices;
+    const decimalPrecision = parseFloat(itemPrices.toFixed(2));
+    totalPriceElement.innerText = decimalPrecision;
+  };
+// /requisito 5
+
 function cartItemClickListener(event) {
   event.target.remove();
 }
@@ -28,6 +41,7 @@ function createCartItemElement({ sku, name, salePrice }) {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
+  sumTotalValue(salePrice);
   li.addEventListener('click', cartItemClickListener);
   console.log(cart);
   console.log(li);
@@ -94,17 +108,10 @@ const fetchProduct = () => {
   // return product;
 };
 
-const sumTotalValue = () => {
-  document.createElement('p').className = 'total-price';
-  // const value = price.salePrice;
-  const prices = document.querySelector('.total-price');
-  cartItems.appendChild(prices);
-  prices.innerText = 'teste';
-};
-
 // requisito 6
 const clearCart = () => {
   cartItems.innerHTML = '';
+  totalPriceElement.innerHTML = '';
 };
 
 const clearButton = document.querySelector('.empty-cart');
